@@ -1,11 +1,17 @@
-import React from "react";
+import React from 'react';
+import { useOutletContext } from 'react-router-dom';
 
 function Home() {
-    return (
-      <div>
-      <h1>hello</h1>
-      </div>
-    );
-  }
-  
-  export default Home;
+  const { names } = useOutletContext();
+
+  return (
+    <>
+      <small>{names}</small>
+      <small className="bottom" id="glass">
+        Home
+      </small>
+    </>
+  );
+}
+
+export default Home;

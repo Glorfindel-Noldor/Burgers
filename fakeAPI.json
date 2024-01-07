@@ -1,0 +1,7 @@
+{
+  "data": [
+    { "firstname": "Sam", "lastname": "Samson" },
+    { "firstname": "Bob", "lastname": "Bobson" },
+    { "firstname": "Ana", "lastname": "Bobson" }
+  ]
+}
