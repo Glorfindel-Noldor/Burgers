@@ -2,11 +2,31 @@ import React from 'react';
 import { useOutletContext } from 'react-router-dom';
 
 function Home() {
-  const { names } = useOutletContext();
+  const { 
+    listNames, 
+    setSearchPerson 
+  }=useOutletContext();
+
+  function listeningEventTargetValue(e) {
+    // onChange{ (e)=>setSearchPerson(e.target.value) }
+    setSearchPerson(e.target.value);
+  }
 
   return (
     <>
-      <small>{names}</small>
+      <form>
+        <input
+          type="text"
+          placeholder="search person"
+          onChange={listeningEventTargetValue}
+        />
+      </form>
+
+      <br />
+      <div id="glass">
+        <small>{listNames()}</small>
+      </div>
+
       <small className="bottom" id="glass">
         Home
       </small>

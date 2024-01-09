@@ -1,28 +1,45 @@
 import React, { useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
-const api = 'http://localhost:3000/data'
+const api = 'http://localhost:3000/data';
 
 function Form() {
-  const { setPull } = useOutletContext();
 
-  const post = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(null),
-  };
+  const { 
+    listNames,
+    setFullNames,
+    conditionalNames,
+    setConditionalNames
+  } = useOutletContext();
 
-  useEffect(()=>{
-    fetch(api,post)
-    .then((res)=>(res.json()))
-    .then((data)=>(setPull(data)))
-    .catch((error)=>(console.log(error)))
-  },[])
+
+
+
+  function SubmitForm(e) {
+    e.preventDefault()
+
+    const newNameJSON = {
+      "firstname" : e.target.firstname.value,
+      "lastname"  : e.target.lastname.value,
+    };
+
+    const post = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newNameJSON),
+    };
+
+    fetch(api, post)
+      .then((res) => res.json())
+      .then(setFullNames)
+      .catch((error) => console.log(error));
+  }
+
 
   return (
     <>
-      <form onSubmit={null}>
+      <form onSubmit={(e)=>SubmitForm(e)}>
         <input
           id="glass"
           type="text"
