@@ -27,8 +27,8 @@ function Main() {
   
 
   const listNames = ()=>(
-    filteredNames.map((item, index)=>(
-      <small key={index}>
+    filteredNames.map((item)=>(
+      <small key={item.id}>
         {item.firstname} {item.lastname} <br/>
       </small>
     ))

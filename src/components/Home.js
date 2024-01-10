@@ -1,11 +1,13 @@
 import React from 'react';
 import { useOutletContext } from 'react-router-dom';
 
-function Home() {
+function Home() {  
   const { 
-    listNames, 
-    setSearchPerson 
-  }=useOutletContext();
+    listNames,
+    setFullNames,//not being utilized !
+    searchPerson,// not being utilized !
+    setSearchPerson
+  } = useOutletContext();
 
   function listeningEventTargetValue(e) {
     // onChange{ (e)=>setSearchPerson(e.target.value) }

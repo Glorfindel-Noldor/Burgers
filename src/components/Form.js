@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useOutletContext } from 'react-router-dom';
 const api = 'http://localhost:3000/data';
 
 function Form() {
-
   const { 
-    listNames,
+    listNames, //not being utilized !
     setFullNames,
-    conditionalNames,
-    setConditionalNames
+    conditionalNames, //not being utilized !
+    setConditionalNames //not being utilized !
   } = useOutletContext();
 
 
@@ -16,6 +15,10 @@ function Form() {
 
   function SubmitForm(e) {
     e.preventDefault()
+
+    if(e.target.firstname.value || e.target.lastname.value === ''){
+      alert('you must enter a first name and a last name!')
+    }
 
     const newNameJSON = {
       "firstname" : e.target.firstname.value,
@@ -32,8 +35,10 @@ function Form() {
 
     fetch(api, post)
       .then((res) => res.json())
-      .then(setFullNames)
+      .then(setFullNames([...listNames,newNameJSON]))
       .catch((error) => console.log(error));
+      
+      e.target.reset()
   }
 
 
@@ -41,24 +46,16 @@ function Form() {
     <>
       <form onSubmit={(e)=>SubmitForm(e)}>
         <input
-          id="glass"
-          type="text"
           name="firstname"
-          value={null}
-          onChange={null}
+          id="glass"       
           placeholder="First Name"
         />
         <input
-          id="glass"
-          type="text"
           name="lastname"
-          value={null}
-          onChange={null}
+          id="glass"
           placeholder="Last Name"
         />
-        <button id="glass" type="submit">
-          Submit
-        </button>
+        <input id='glass' type='submit' value={'submit'}/>
       </form>
 
       <small className="bottom" id="glass">
