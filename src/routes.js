@@ -21,7 +21,7 @@ const routes = [
         element: <Form />,
       },
       {
-        path: '/delete',
+        path: '/delete/:id',
         element: <Delete/>,
       }
     ],

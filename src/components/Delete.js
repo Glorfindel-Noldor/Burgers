@@ -1,31 +1,46 @@
 import React from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, useParams } from 'react-router-dom';
 const api = 'http://localhost:3000/data';
 
 function Delete() {
-  const { listNames, setFullNames, searchPerson, setSearchPerson } =
-    useOutletContext();
+    const { 
+        listNames, 
+        setFullNames, 
+        searchPerson, 
+        setSearchPerson 
+    } = useOutletContext();
+  const { id } = useParams();
 
   function listeningEventTargetValue(e) {
-    // onChange{ (e)=>setSearchPerson(e.target.value) }
     setSearchPerson(e.target.value);
   }
 
-  const handleDelete = (id) => {
-    // Assuming 'id' is the unique identifier for the item to be deleted
+  const handleDelete = () => {
     fetch(`${api}/${id}`, {
       method: 'DELETE',
     })
-      .then((res) => res.json())
-      .then((deletedItem) => {
-        // Update the list of names by filtering out the deleted item
-        const updatedList = listNames.filter(
-          (item) => item.id !== deletedItem.id
-        );
+    .then((res) => res.json())
+    .then((deletedItem) => {
+    const updatedList = listNames.filter(
+        (item) => item.id !== deletedItem.id
+    );
         setFullNames(updatedList);
-      })
+    })
       .catch((error) => console.log(error));
   };
+
+    const elements= () => {
+        listNames.map(
+            (item)=>{
+                <li key={item.id}>
+                    <button id="glass" onClick={() => handleDelete(item.id)}>
+                        {item.firstname} {item.lastname}
+                    <br/>
+                    </button>
+                </li>;
+            }
+        )
+    }
 
   return (
     <>
@@ -38,7 +53,7 @@ function Delete() {
       <br />
       <br />
       <div id="glass">
-        <small>{listNames()}</small>
+        <ul>{elements}</ul>
       </div>
     </>
   );
