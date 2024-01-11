@@ -16,7 +16,7 @@ function Form() {
   function SubmitForm(e) {
     e.preventDefault()
 
-    if(e.target.firstname.value || e.target.lastname.value === ''){
+    if(e.target.firstname.value === '' || e.target.lastname.value === ''){
       alert('you must enter a first name and a last name!')
     }
 

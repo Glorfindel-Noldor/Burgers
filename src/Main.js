@@ -16,23 +16,15 @@ function Main() {
  const filteredNames = fullnames.filter((item)=>{
   return item.lastname.toLowerCase().includes(searchPerson.toLowerCase()) || 
   item.firstname.toLowerCase().includes(searchPerson.toLowerCase())
-
-  /*
-  if(tem.lastname.toLowerCase().includes(searchPerson.toLowerCase())){
-    return true
-  }
-  else{ return false }
-  */
 })
   
 
-  const listNames = ()=>(
-    filteredNames.map((item)=>(
-      <small key={item.id}>
+  const listNames = ()=> filteredNames.map((item)=>(
+       <small key={item.id}>
         {item.firstname} {item.lastname} <br/>
       </small>
     ))
-  )
+  
   
   return (
     <div>
@@ -40,6 +32,7 @@ function Main() {
         <Navbar />
       </header>
       <Outlet context={{
+        fullnames,
         listNames,
         setFullNames,
         searchPerson,

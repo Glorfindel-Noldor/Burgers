@@ -3,44 +3,47 @@ import { useOutletContext, useParams } from 'react-router-dom';
 const api = 'http://localhost:3000/data';
 
 function Delete() {
-    const { 
-        listNames, 
-        setFullNames, 
-        searchPerson, 
-        setSearchPerson 
-    } = useOutletContext();
+  const {
+    fullnames, 
+    listNames, //is an array 
+    setFullNames, 
+    searchPerson, 
+    setSearchPerson 
+  } = useOutletContext();
   const { id } = useParams();
+
+
+
+
+
 
   function listeningEventTargetValue(e) {
     setSearchPerson(e.target.value);
   }
 
-  const handleDelete = () => {
-    fetch(`${api}/${id}`, {
+  const handleDelete = (idToDelete) => {
+    fetch(`${api}/${idToDelete}`, {
       method: 'DELETE',
     })
-    .then((res) => res.json())
-    .then((deletedItem) => {
-    const updatedList = listNames.filter(
-        (item) => item.id !== deletedItem.id
-    );
+      .then((res) => {
+        if (res.ok) {
+          return idToDelete; // Return the id of the deleted item
+        } else {
+          throw new Error('Failed to delete item');
+        }
+      })
+      .then((deletedItemId) => {
+        const updatedList = listNames.filter((item) => item.id !== deletedItemId);
         setFullNames(updatedList);
-    })
+      })
       .catch((error) => console.log(error));
   };
+  
 
-    const elements= () => {
-        listNames.map(
-            (item)=>{
-                <li key={item.id}>
-                    <button id="glass" onClick={() => handleDelete(item.id)}>
-                        {item.firstname} {item.lastname}
-                    <br/>
-                    </button>
-                </li>;
-            }
-        )
-    }
+
+
+
+
 
   return (
     <>
@@ -53,7 +56,12 @@ function Delete() {
       <br />
       <br />
       <div id="glass">
-        <ul>{elements}</ul>
+        <ul>
+          {fullnames.map((item)=>(
+            <button key={item.id} onClick={()=>handleDelete(item.id)}>{item.firstname[0]} {item.lastname}</button>
+          ))
+          }
+        </ul>
       </div>
     </>
   );
