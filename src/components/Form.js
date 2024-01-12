@@ -1,8 +1,9 @@
-import React from 'react';
-import { useOutletContext } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useOutletContext, useNavigate } from 'react-router-dom';
 const api = 'http://localhost:3000/data';
 
 function Form() {
+  const reloadPage = useNavigate()
   const { 
     listNames, //not being utilized !
     setFullNames,
@@ -11,20 +12,15 @@ function Form() {
   } = useOutletContext();
 
 
-
-
   function SubmitForm(e) {
     e.preventDefault()
-
-    if(e.target.firstname.value === '' || e.target.lastname.value === ''){
-      alert('you must enter a first name and a last name!')
-    }
-
+    
+    
     const newNameJSON = {
       "firstname" : e.target.firstname.value,
       "lastname"  : e.target.lastname.value,
     };
-
+     
     const post = {
       method: 'POST',
       headers: {
@@ -35,10 +31,12 @@ function Form() {
 
     fetch(api, post)
       .then((res) => res.json())
-      .then(setFullNames([...listNames,newNameJSON]))
+      .then((newName)=>{
+        setFullNames((prevList)=>([...prevList, newName]))
+        e.target.reset();
+      })
       .catch((error) => console.log(error));
-      
-      e.target.reset()
+
   }
 
 

@@ -1,3 +1,9 @@
 {
-  "data": []
+  "data": [
+    {
+      "firstname": "Greg",
+      "lastname": "Gregson",
+      "id": 1
+    }
+  ]
 }
