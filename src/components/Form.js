@@ -32,8 +32,9 @@ function Form() {
     fetch(api, post)
       .then((res) => res.json())
       .then((newName)=>{
-        setFullNames((prevList)=>([...prevList, newName]))
+        setFullNames((prevList)=>([ newName, ...prevList]))
         e.target.reset();
+        alert(`you have added: ${newName.firstname} ${newName.lastname}`)
       })
       .catch((error) => console.log(error));
 

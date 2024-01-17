@@ -10,6 +10,7 @@ function Home() {
   } = useOutletContext();
 
   function listeningEventTargetValue(e) {
+
     // onChange{ (e)=>setSearchPerson(e.target.value) }
     setSearchPerson(e.target.value);
   }
@@ -25,10 +26,11 @@ function Home() {
       </form>
 
       <br />
+        <hr/>
       <div id="glass">
         <small>{listNames()}</small>
       </div>
-
+        <hr/>
       <small className="bottom" id="glass">
         Home
       </small>

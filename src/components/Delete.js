@@ -1,5 +1,5 @@
 import React from 'react';
-import { useOutletContext, useParams, useNavigate } from 'react-router-dom';
+import { useOutletContext, useNavigate } from 'react-router-dom';
 const api = 'http://localhost:3000/data';
 
 function Delete() {
@@ -25,7 +25,7 @@ function Delete() {
       .then((deletedItem) => {
         const updatedList = listNames.filter((item) => item.id !== deletedItem.id);
         setFullNames(updatedList);
-        window.location.reload();
+        
       })
       .catch((error) => console.log(error));   
   };
@@ -33,7 +33,7 @@ function Delete() {
     
   return (
     <>
-      <h4>Click on name to delete!</h4>
+      <h4>Click on a name to delete!</h4>
       <input
         type="text"
         placeholder="search person"
@@ -46,7 +46,8 @@ function Delete() {
           {fullnames.map((item)=>(
             <button 
               key={item.id} 
-              onClick={()=>handleDelete(item.id)}>
+              onClick={()=>handleDelete(item.id)? null : window.location.reload()}
+            >
               {item.firstname[0]} {item.lastname}
             </button>
           ))}
