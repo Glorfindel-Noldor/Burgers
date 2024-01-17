@@ -14,8 +14,15 @@ function Delete() {
 
 
   function listeningEventTargetValue(e) {
-    setSearchPerson(e.target.value);
+    const searchTerm = e.target.value.toLowerCase();
+  
+    const filteredNames = fullnames.filter((item) =>
+      item.lastname.toLowerCase().includes(searchTerm) ||
+      item.firstname.toLowerCase().includes(searchTerm)
+    );
+    setFullNames(filteredNames);
   }
+  
 
   const handleDelete = (idToDelete) => {
     fetch(`${api}/${idToDelete}`, {
