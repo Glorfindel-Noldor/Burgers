@@ -17,7 +17,7 @@ function Delete() {
     const searchTerm = e.target.value.toLowerCase();
     if (searchTerm === '') {
       window.location.reload()
-      
+ 
     } 
     else {
       const filteredNames = fullnames.filter((item) =>
