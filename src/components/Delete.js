@@ -15,12 +15,20 @@ function Delete() {
 
   function listeningEventTargetValue(e) {
     const searchTerm = e.target.value.toLowerCase();
-  
-    const filteredNames = fullnames.filter((item) =>
-      item.lastname.toLowerCase().includes(searchTerm) ||
-      item.firstname.toLowerCase().includes(searchTerm)
-    );
-    setFullNames(filteredNames);
+    if (searchTerm === '') {
+      window.location.reload()
+      
+    } 
+    else {
+      const filteredNames = fullnames.filter((item) =>
+        item.lastname.toLowerCase().includes(searchTerm) ||
+        item.firstname.toLowerCase().includes(searchTerm)
+      );
+      setFullNames(filteredNames);
+    }
+    
+
+
   }
   
 
